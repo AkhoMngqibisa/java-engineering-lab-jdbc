@@ -21,6 +21,8 @@ public class DemoJdbc {
 
             System.out.println("Process result set...");
             ResultSet resultSet = statement.executeQuery(query);
+            System.out.println("Has data...: "+resultSet.next());
+
 
         } catch(Exception e){
             System.err.println(e.getMessage());
