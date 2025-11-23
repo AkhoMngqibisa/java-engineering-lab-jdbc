@@ -11,14 +11,16 @@ public class DemoJdbc {
             String url = "jdbc:postgresql://localhost:5432/postgres";
             String user = "postgres";
             String password = "password";
-            String query = "select * from student where studentNumber = 123";
+            String query = "SELECT * FROM public.\"Student\" WHERE \"studentNumber\" = 123 ";
 
+            System.out.println("Creating connection...");
             Connection connection = DriverManager.getConnection(url,user,password);
-            System.out.println("Connected to database successfully");
 
+            System.out.println("Executing Statement...");
             Statement statement = connection.createStatement();
-            statement.executeQuery(query);
 
+            System.out.println("Process result set...");
+            ResultSet resultSet = statement.executeQuery(query);
 
         } catch(Exception e){
             System.err.println(e.getMessage());
