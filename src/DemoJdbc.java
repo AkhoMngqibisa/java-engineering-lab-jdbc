@@ -23,6 +23,9 @@ public class DemoJdbc {
             ResultSet resultSet = statement.executeQuery(query);
             System.out.println("Has data...: "+resultSet.next());
 
+            System.out.println("Closing connection...");
+            connection.close();
+
 
         } catch(Exception e){
             System.err.println(e.getMessage());
