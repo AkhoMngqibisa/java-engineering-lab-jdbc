@@ -5,10 +5,10 @@ import java.sql.Statement;
 
 public class DemoJdbc {
 
-    private Connection connection;
-    private Statement statement;
+    private static Connection connection;
+    private static Statement statement;
 
-    public void setConnection() {
+    public static void setConnection() {
         try {
             // Create a connection
             String url = "jdbc:postgresql://localhost:5432/postgres";
@@ -24,7 +24,7 @@ public class DemoJdbc {
         return connection;
     }
 
-    public void setStatement() {
+    public static void setStatement() {
         try {
             statement = connection.createStatement();
 
@@ -37,7 +37,7 @@ public class DemoJdbc {
         return statement;
     }
 
-    public void getAllStudents() {
+    public static void getAllStudents() {
         try {
             String query = "SELECT * FROM public.\"Student\"";
             ResultSet resultSet = statement.executeQuery(query);
@@ -58,6 +58,9 @@ public class DemoJdbc {
     public static void main(String[] args) {
 
         try {
+            setConnection();
+            setStatement();
+            getAllStudents();
 
 
         } catch (Exception e) {
