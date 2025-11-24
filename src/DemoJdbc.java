@@ -37,20 +37,9 @@ public class DemoJdbc {
         return statement;
     }
 
-
-    public static void main(String[] args) {
-
+    public void getAllStudents() {
         try {
-            // Load and register
-
             String query = "SELECT * FROM public.\"Student\"";
-
-            System.out.println("--->>> Creating connection...");
-
-            System.out.println("--->>> Executing Statement...");
-            Statement statement = connection.createStatement();
-
-            System.out.println("--->>> Process result set...");
             ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
@@ -59,8 +48,16 @@ public class DemoJdbc {
                 System.out.println(resultSet.getString(3));
             }
 
-            System.out.println("\n--->>> Closing connection...");
             connection.close();
+
+        } catch (Exception exception) {
+            System.err.println(exception.getMessage());
+        }
+    }
+
+    public static void main(String[] args) {
+
+        try {
 
 
         } catch (Exception e) {
