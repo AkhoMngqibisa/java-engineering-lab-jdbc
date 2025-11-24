@@ -8,7 +8,7 @@ public class DemoJdbc {
     private static Connection connection;
     private static Statement statement;
 
-    public static void setConnection() {
+    private static void setConnection() {
         try {
             // Create a connection
             String url = "jdbc:postgresql://localhost:5432/postgres";
@@ -20,35 +20,36 @@ public class DemoJdbc {
         }
     }
 
-    public Connection getConnection() {
+    private static Connection getConnection() {
         return connection;
     }
 
-    public static void setStatement() {
+    private static void setStatement() {
         try {
-            statement = connection.createStatement();
+            statement = getConnection().createStatement();
 
         } catch (Exception exception) {
             System.err.println(exception.getMessage());
         }
     }
 
-    public Statement getStatement() {
+    private static Statement getStatement() {
         return statement;
     }
 
     public static void getAllStudents() {
         try {
             String query = "SELECT * FROM public.\"Student\"";
-            ResultSet resultSet = statement.executeQuery(query);
+            ResultSet resultSet = getStatement().executeQuery(query);
 
+            System.out.println("######## Getting all students");
             while (resultSet.next()) {
                 System.out.print(resultSet.getString(1) + " - ");
                 System.out.print(resultSet.getString(2) + " - ");
                 System.out.println(resultSet.getString(3));
             }
 
-            connection.close();
+            getConnection().close();
 
         } catch (Exception exception) {
             System.err.println(exception.getMessage());
