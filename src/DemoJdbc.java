@@ -1,20 +1,33 @@
 import java.sql.*;
 
 public class DemoJdbc {
-    public static void main(String[] args) {
 
+    private Connection connection;
+
+    public void setConnection() {
         try {
-            // Load and register
-            Class.forName("org.postgresql.Driver");
-
             // Create a connection
             String url = "jdbc:postgresql://localhost:5432/postgres";
             String user = "postgres";
             String password = "password";
+            connection = DriverManager.getConnection(url,user,password);
+        } catch (Exception exception) {
+            System.err.println(exception.getMessage());
+        }
+    }
+
+    public Connection getConnection() {
+        return connection;
+    }
+
+    public static void main(String[] args) {
+
+        try {
+            // Load and register
+
             String query = "SELECT * FROM public.\"Student\"";
 
             System.out.println("--->>> Creating connection...");
-            Connection connection = DriverManager.getConnection(url,user,password);
 
             System.out.println("--->>> Executing Statement...");
             Statement statement = connection.createStatement();
