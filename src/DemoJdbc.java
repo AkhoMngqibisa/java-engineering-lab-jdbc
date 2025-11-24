@@ -1,8 +1,12 @@
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class DemoJdbc {
 
     private Connection connection;
+    private Statement statement;
 
     public void setConnection() {
         try {
@@ -10,7 +14,7 @@ public class DemoJdbc {
             String url = "jdbc:postgresql://localhost:5432/postgres";
             String user = "postgres";
             String password = "password";
-            connection = DriverManager.getConnection(url,user,password);
+            connection = DriverManager.getConnection(url, user, password);
         } catch (Exception exception) {
             System.err.println(exception.getMessage());
         }
@@ -19,6 +23,20 @@ public class DemoJdbc {
     public Connection getConnection() {
         return connection;
     }
+
+    public void setStatement() {
+        try {
+            statement = connection.createStatement();
+
+        } catch (Exception exception) {
+            System.err.println(exception.getMessage());
+        }
+    }
+
+    public Statement getStatement() {
+        return statement;
+    }
+
 
     public static void main(String[] args) {
 
@@ -35,9 +53,9 @@ public class DemoJdbc {
             System.out.println("--->>> Process result set...");
             ResultSet resultSet = statement.executeQuery(query);
 
-            while(resultSet.next()) {
-                System.out.print(resultSet.getString(1)+ " - ");
-                System.out.print(resultSet.getString(2)+ " - ");
+            while (resultSet.next()) {
+                System.out.print(resultSet.getString(1) + " - ");
+                System.out.print(resultSet.getString(2) + " - ");
                 System.out.println(resultSet.getString(3));
             }
 
@@ -45,7 +63,7 @@ public class DemoJdbc {
             connection.close();
 
 
-        } catch(Exception e){
+        } catch (Exception e) {
             System.err.println(e.getMessage());
         }
     }
