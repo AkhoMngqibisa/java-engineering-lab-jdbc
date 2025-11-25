@@ -1,7 +1,4 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
 public class DemoJdbc {
 
@@ -65,6 +62,22 @@ public class DemoJdbc {
         }
     }
 
+    public static void insertStudentUsingPreparedStatement() {
+        String query = "INSERT INTO public.\"Student\" VALUES (?, ?, ?)";
+
+        try {
+            PreparedStatement preparedStatement = getConnection().prepareStatement(query);
+            preparedStatement.setLong(1, 127L);
+            preparedStatement.setString(2, "Sponge");
+            preparedStatement.setString(3, "Ndzoto");
+
+            preparedStatement.execute();
+
+        } catch (Exception exception) {
+            System.err.println(exception.getMessage());
+        }
+    }
+
     public static void updateStudent() {
         String query = "UPDATE public.\"Student\" SET name = 'Uminathi' WHERE \"studentNumber\" = '126'";
 
@@ -96,6 +109,7 @@ public class DemoJdbc {
             //insertStudent();
             //updateStudent();
             //deleteStudent();
+            //insertStudentUsingPreparedStatement();
 
             getConnection().close();
         } catch (Exception e) {
