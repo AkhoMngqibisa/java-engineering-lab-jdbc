@@ -49,8 +49,17 @@ public class DemoJdbc {
                 System.out.println(resultSet.getString(3));
             }
 
-            getConnection().close();
+        } catch (Exception exception) {
+            System.err.println(exception.getMessage());
+        }
+    }
 
+    public static void insertStudent() {
+        String query = "INSERT INTO public.\"Student\" VALUES ('126', 'Bob', 'Ndzoto')";
+
+        try {
+            boolean status = getStatement().execute(query);
+            System.out.println("####### Inserting student into table: " + status);
         } catch (Exception exception) {
             System.err.println(exception.getMessage());
         }
@@ -62,8 +71,9 @@ public class DemoJdbc {
             setConnection();
             setStatement();
             getAllStudents();
+            //insertStudent();
 
-
+            getConnection().close();
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
