@@ -76,6 +76,17 @@ public class DemoJdbc {
         }
     }
 
+    public static void deleteStudent() {
+        String query = "DELETE FROM public.\"Student\" WHERE \"studentNumber\" = '127'";
+
+        try {
+            boolean status = getStatement().execute(query);
+            System.out.println("####### Deleting student into table: " + status);
+        } catch (Exception exception) {
+            System.err.println(exception.getMessage());
+        }
+    }
+
     public static void main(String[] args) {
 
         try {
@@ -83,7 +94,8 @@ public class DemoJdbc {
             setStatement();
             getAllStudents();
             //insertStudent();
-            updateStudent();
+            //updateStudent();
+            //deleteStudent();
 
             getConnection().close();
         } catch (Exception e) {
