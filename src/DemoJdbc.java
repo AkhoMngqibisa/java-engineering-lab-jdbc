@@ -65,6 +65,17 @@ public class DemoJdbc {
         }
     }
 
+    public static void updateStudent() {
+        String query = "UPDATE public.\"Student\" SET name = 'Uminathi' WHERE \"studentNumber\" = '126'";
+
+        try {
+            boolean status = getStatement().execute(query);
+            System.out.println("####### Updating student into table: " + status);
+        } catch (Exception exception) {
+            System.err.println(exception.getMessage());
+        }
+    }
+
     public static void main(String[] args) {
 
         try {
@@ -72,6 +83,7 @@ public class DemoJdbc {
             setStatement();
             getAllStudents();
             //insertStudent();
+            updateStudent();
 
             getConnection().close();
         } catch (Exception e) {
